@@ -42,20 +42,22 @@ export class DynamoDbUserRepository implements UserRepository {
 
   async update(id: string, user: Partial<User>): Promise<User> {
     const updateFields = Object.keys(user);
+  
     if (updateFields.length === 0) {
-      return this.findById(id) as Promise<User>; // nada a atualizar
+      return this.findById(id) as Promise<User>;
     }
-
-    const expressionParts = updateFields.map((k, i) => `#key${i} = :value${i}`);
-    const expressionAttributeNames = updateFields.reduce(
-      (acc, key, i) => ({ ...acc, [`#key${i}`]: key }),
-      {},
-    );
-    const expressionAttributeValues = updateFields.reduce(
-      (acc, key, i) => ({ ...acc, [`:value${i}`]: user[key as keyof User] }),
-      {},
-    );
-
+  
+    const expressionParts = updateFields.map((key, i) => `#key${i} = :value${i}`);
+    const expressionAttributeNames = updateFields.reduce((acc, key, i) => {
+      acc[`#key${i}`] = key;
+      return acc;
+    }, {});
+  
+    const expressionAttributeValues = updateFields.reduce((acc, key, i) => {
+      acc[`:value${i}`] = user[key as keyof User] !== undefined ? user[key as keyof User] : null;
+      return acc;
+    }, {});
+  
     const result = await this.client.send(
       new UpdateCommand({
         TableName: this.tableName,
@@ -63,12 +65,13 @@ export class DynamoDbUserRepository implements UserRepository {
         UpdateExpression: `SET ${expressionParts.join(', ')}`,
         ExpressionAttributeNames: expressionAttributeNames,
         ExpressionAttributeValues: expressionAttributeValues,
-        ReturnValues: 'ALL_NEW',
+        ReturnValues: 'ALL_NEW',  
       }),
     );
-
-    return result.Attributes as User;
+  
+    return result.Attributes as User;  
   }
+  
 
   async delete(id: string): Promise<void> {
     await this.client.send(

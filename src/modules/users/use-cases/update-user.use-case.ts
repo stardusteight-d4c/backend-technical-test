@@ -13,6 +13,11 @@ export class UpdateUserUseCase {
   async execute(id: string, dto: UpdateUserDto): Promise<User> {
     const user = await this.userRepository.findById(id);
     if (!user) throw new NotFoundException(`User ${id} not found`);
-    return this.userRepository.update(id, dto);
+    const filteredDto = Object.fromEntries(
+      Object.entries(dto).filter(
+        ([_, value]) => value !== undefined && value !== null,
+      ),
+    );
+    return this.userRepository.update(id, filteredDto);
   }
 }

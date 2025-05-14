@@ -18,6 +18,11 @@ export class UpdateEstablishmentUseCase {
     if (!existing) {
       throw new NotFoundException(`Establishment ${id} not found`);
     }
-    return this.repository.update(id, dto);
+    const filteredDto = Object.fromEntries(
+      Object.entries(dto).filter(
+        ([_, value]) => value !== undefined && value !== null,
+      ),
+    );
+    return this.repository.update(id, filteredDto);
   }
 }
