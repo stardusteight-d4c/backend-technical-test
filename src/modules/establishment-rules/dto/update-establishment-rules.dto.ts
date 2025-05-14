@@ -1,6 +1,6 @@
 import { IsInt, IsOptional, Min } from 'class-validator';
 
-export class UpdateEstablishmentRuleDto {
+export class UpdateEstablishmentRulesDto {
   @IsOptional()
   @IsInt()
   @Min(0)

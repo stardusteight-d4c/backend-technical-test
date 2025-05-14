@@ -1,6 +1,6 @@
 import { IsUUID, IsInt, Min } from 'class-validator';
 
-export class CreateEstablishmentRuleDto {
+export class CreateEstablishmentRulesDto {
   @IsUUID()
   establishmentId: string;
 
