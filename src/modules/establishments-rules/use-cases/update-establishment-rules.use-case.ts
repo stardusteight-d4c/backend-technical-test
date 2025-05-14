@@ -1,13 +1,14 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { EstablishmentRulesRepository } from '../repositories/establishment-rules.repository';
+
+import { EstablishmentsRulesRepository } from '../repositories/establishments-rules.repository';
 import { UpdateEstablishmentRulesDto } from '../dto/update-establishment-rules.dto';
 import { EstablishmentRules } from '../entities/establishment-rule.entity';
 
 @Injectable()
 export class UpdateEstablishmentRulesUseCase {
   constructor(
-    @Inject('EstablishmentRulesRepository')
-    private readonly repository: EstablishmentRulesRepository,
+    @Inject('EstablishmentsRulesRepository')
+    private readonly repository: EstablishmentsRulesRepository,
   ) {}
 
   async execute(

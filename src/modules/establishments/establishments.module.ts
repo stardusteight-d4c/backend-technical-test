@@ -28,5 +28,11 @@ import { UsersModule } from '../users/user.module';
       useClass: DynamoDbEstablishmentsRepository,
     },
   ],
+  exports: [
+    {
+      provide: 'EstablishmentsRepository',
+      useClass: DynamoDbEstablishmentsRepository,
+    },
+  ],
 })
 export class EstablishmentsModule {}

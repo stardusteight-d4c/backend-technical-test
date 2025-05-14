@@ -8,15 +8,15 @@ import {
   ScanCommand,
 } from '@aws-sdk/lib-dynamodb';
 
-import { EstablishmentRulesRepository } from './establishment-rules.repository';
+import { EstablishmentsRulesRepository } from './establishments-rules.repository';
 import { DYNAMO_CLIENT } from '../../../common/dynamodb/dynamodb.provider';
 import { EstablishmentRules } from '../entities/establishment-rule.entity';
 
 @Injectable()
-export class DynamoDbEstablishmentRulesRepository
-  implements EstablishmentRulesRepository
+export class DynamoDbEstablishmentsRulesRepository
+  implements EstablishmentsRulesRepository
 {
-  private readonly tableName = 'EstablishmentRules';
+  private readonly tableName = 'EstablishmentsRules';
 
   constructor(
     @Inject(DYNAMO_CLIENT)

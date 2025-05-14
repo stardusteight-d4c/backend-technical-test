@@ -1,11 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { EstablishmentRulesRepository } from '../repositories/establishment-rules.repository';
+
+import { EstablishmentsRulesRepository } from '../repositories/establishments-rules.repository';
 
 @Injectable()
 export class DeleteEstablishmentRulesUseCase {
   constructor(
-    @Inject('EstablishmentRulesRepository')
-    private readonly repository: EstablishmentRulesRepository,
+    @Inject('EstablishmentsRulesRepository')
+    private readonly repository: EstablishmentsRulesRepository,
   ) {}
 
   async execute(id: string): Promise<void> {

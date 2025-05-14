@@ -18,8 +18,8 @@ import {
   DeleteEstablishmentRulesUseCase,
 } from '../use-cases';
 
-@Controller('establishment-rules')
-export class EstablishmentRulesController {
+@Controller('establishments-rules')
+export class EstablishmentsRulesController {
   constructor(
     private readonly createUseCase: CreateEstablishmentRulesUseCase,
     private readonly getByEstablishmentUseCase: GetEstablishmentRulesByEstablishmentIdUseCase,

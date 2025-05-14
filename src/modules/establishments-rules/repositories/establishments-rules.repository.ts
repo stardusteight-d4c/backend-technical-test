@@ -1,6 +1,6 @@
 import { EstablishmentRules } from '../entities/establishment-rule.entity';
 
-export interface EstablishmentRulesRepository {
+export interface EstablishmentsRulesRepository {
   create(rule: EstablishmentRules): Promise<EstablishmentRules>;
   findByEstablishmentId(
     establishmentId: string,

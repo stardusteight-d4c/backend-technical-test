@@ -1,8 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+
+import {
+  EstablishmentsModule,
+  EstablishmentsRulesModule,
+  UsersModule,
+} from './modules';
 import { CommonModule } from './common/common.module';
-import { UsersModule } from './modules/users/user.module';
-import { EstablishmentsModule } from './modules/establishments/establishments.module';
 
 @Module({
   imports: [
@@ -13,6 +17,7 @@ import { EstablishmentsModule } from './modules/establishments/establishments.mo
     CommonModule,
     UsersModule,
     EstablishmentsModule,
+    EstablishmentsRulesModule,
   ],
 })
 export class AppModule {}

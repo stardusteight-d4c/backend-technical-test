@@ -5,7 +5,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 
-import { UserRepository } from 'src/modules/users/repositories/users.repository';
+import { UsersRepository } from 'src/modules/users/repositories/users.repository';
 
 import { Establishment } from '../entities/establishment.entity';
 import { EstablishmentsRepository } from '../repositories/establishments.repository';
@@ -19,12 +19,12 @@ export class CreateEstablishmentUseCase {
     @Inject('EstablishmentsRepository')
     private readonly repository: EstablishmentsRepository,
 
-    @Inject('UserRepository')
-    private readonly userRepository: UserRepository,
+    @Inject('UsersRepository')
+    private readonly usersRepository: UsersRepository,
   ) {}
 
   async execute(dto: CreateEstablishmentDto): Promise<Establishment> {
-    const user = await this.userRepository.findById(dto.ownerId);
+    const user = await this.usersRepository.findById(dto.ownerId);
 
     if (!user) {
       throw new NotFoundException(`Owner with ID ${dto.ownerId} not found`);
