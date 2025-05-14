@@ -5,6 +5,7 @@ import {
   EstablishmentsModule,
   EstablishmentsRulesModule,
   UsersModule,
+  ProductsModule,
 } from './modules';
 import { CommonModule } from './common/common.module';
 
@@ -18,6 +19,7 @@ import { CommonModule } from './common/common.module';
     UsersModule,
     EstablishmentsModule,
     EstablishmentsRulesModule,
+    ProductsModule,
   ],
 })
 export class AppModule {}
