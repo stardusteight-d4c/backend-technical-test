@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { EstablishmentsRulesRepository } from '../repositories/establishments-rules.repository';
 import { UpdateEstablishmentRulesDto } from '../dto/update-establishment-rules.dto';
 import { EstablishmentRules } from '../entities/establishment-rule.entity';
+import { sanitizeObject } from 'src/shared/utils/sanitize-object';
 
 @Injectable()
 export class UpdateEstablishmentRulesUseCase {
@@ -15,6 +16,7 @@ export class UpdateEstablishmentRulesUseCase {
     id: string,
     dto: UpdateEstablishmentRulesDto,
   ): Promise<EstablishmentRules> {
-    return this.repository.update(id, dto);
+    const filteredDto = sanitizeObject(dto);
+    return this.repository.update(id, filteredDto);
   }
 }

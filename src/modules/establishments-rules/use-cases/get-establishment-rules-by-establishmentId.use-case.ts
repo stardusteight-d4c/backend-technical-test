@@ -1,16 +1,26 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 
 import { EstablishmentsRulesRepository } from '../repositories/establishments-rules.repository';
 import { EstablishmentRules } from '../entities/establishment-rule.entity';
+import { EstablishmentsRepository } from 'src/modules/establishments/repositories/establishments.repository';
 
 @Injectable()
 export class GetEstablishmentRulesByEstablishmentIdUseCase {
   constructor(
     @Inject('EstablishmentsRulesRepository')
-    private readonly repository: EstablishmentsRulesRepository,
+    private readonly rulesRepository: EstablishmentsRulesRepository,
+
+    @Inject('EstablishmentRepository')
+    private readonly establishmentsRepository: EstablishmentsRepository,
   ) {}
 
   async execute(establishmentId: string): Promise<EstablishmentRules | null> {
-    return this.repository.findByEstablishmentId(establishmentId);
+    const exists = await this.establishmentsRepository.findById(establishmentId);
+
+    if (!exists) {
+      throw new NotFoundException(`Establishment ${establishmentId} not found`);
+    }
+
+    return this.rulesRepository.findByEstablishmentId(establishmentId);
   }
 }
