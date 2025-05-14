@@ -1,13 +1,13 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { EstablishmentRepository } from '../repositories/establishment.repository';
+import { EstablishmentsRepository } from '../repositories/establishments.repository';
 import { UpdateEstablishmentDto } from '../dto/update-establishment.dto';
 import { Establishment } from '../entities/establishment.entity';
 
 @Injectable()
 export class UpdateEstablishmentUseCase {
   constructor(
-    @Inject('EstablishmentRepository')
-    private readonly repository: EstablishmentRepository,
+    @Inject('EstablishmentsRepository')
+    private readonly repository: EstablishmentsRepository,
   ) {}
 
   async execute(

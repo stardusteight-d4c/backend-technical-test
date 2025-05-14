@@ -7,13 +7,13 @@ import {
   DeleteCommand,
   ScanCommand,
 } from '@aws-sdk/lib-dynamodb';
-import { EstablishmentRepository } from './establishment.repository';
+import { EstablishmentsRepository } from './establishments.repository';
 import { Establishment } from '../entities/establishment.entity';
 import { DYNAMO_CLIENT } from '../../../common/dynamodb/dynamodb.provider';
 
 @Injectable()
-export class DynamoDbEstablishmentRepository
-  implements EstablishmentRepository
+export class DynamoDbEstablishmentsRepository
+  implements EstablishmentsRepository
 {
   private readonly tableName = 'Establishments';
 

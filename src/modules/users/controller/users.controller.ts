@@ -18,7 +18,7 @@ import {
 } from '../use-cases';
 
 @Controller('users')
-export class UserController {
+export class UsersController {
   constructor(
     private readonly createUserUseCase: CreateUserUseCase,
     private readonly getUserUseCase: GetUserUseCase,

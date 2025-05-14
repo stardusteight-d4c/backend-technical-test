@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { EstablishmentRepository } from '../repositories/establishment.repository';
+import { EstablishmentsRepository } from '../repositories/establishments.repository';
 import { Establishment } from '../entities/establishment.entity';
 
 @Injectable()
 export class ListEstablishmentsUseCase {
   constructor(
-    @Inject('EstablishmentRepository')
-    private readonly repository: EstablishmentRepository,
+    @Inject('EstablishmentsRepository')
+    private readonly repository: EstablishmentsRepository,
   ) {}
 
   async execute(): Promise<Establishment[]> {

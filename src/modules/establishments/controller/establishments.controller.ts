@@ -8,6 +8,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+
 import {
   CreateEstablishmentUseCase,
   DeleteEstablishmentUseCase,
@@ -16,11 +17,12 @@ import {
   UpdateEstablishmentUseCase,
   FindEstablishmentsByTypeUseCase,
 } from '../use-cases';
+
 import { CreateEstablishmentDto } from '../dto/create-establishment.dto';
 import { UpdateEstablishmentDto } from '../dto/update-establishment.dto';
 
 @Controller('establishments')
-export class EstablishmentController {
+export class EstablishmentsController {
   constructor(
     private readonly createUseCase: CreateEstablishmentUseCase,
     private readonly getUseCase: GetEstablishmentUseCase,

@@ -8,11 +8,11 @@ import {
   ListUsersUseCase,
 } from './use-cases';
 
-import { DynamoDbUserRepository } from './repositories/dynamodb-user.repository';
-import { UserController } from './controller/user.controller';
+import { DynamoDbUsersRepository } from './repositories/dynamodb-users.repository';
+import { UsersController } from './controller/users.controller';
 
 @Module({
-  controllers: [UserController],
+  controllers: [UsersController],
   providers: [
     CreateUserUseCase,
     GetUserUseCase,
@@ -20,15 +20,15 @@ import { UserController } from './controller/user.controller';
     DeleteUserUseCase,
     ListUsersUseCase,
     {
-      provide: 'UserRepository',
-      useClass: DynamoDbUserRepository,
+      provide: 'UsersRepository',
+      useClass: DynamoDbUsersRepository,
     },
   ],
   exports: [
     {
-      provide: 'UserRepository',
-      useClass: DynamoDbUserRepository,
+      provide: 'UsersRepository',
+      useClass: DynamoDbUsersRepository,
     },
   ],
 })
-export class UserModule {}
+export class UsersModule {}

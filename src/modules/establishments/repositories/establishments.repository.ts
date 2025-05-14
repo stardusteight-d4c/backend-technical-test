@@ -1,6 +1,6 @@
 import { Establishment } from '../entities/establishment.entity';
 
-export interface EstablishmentRepository {
+export interface EstablishmentsRepository {
   create(establishment: Establishment): Promise<Establishment>;
   findById(id: string): Promise<Establishment | null>;
   update(

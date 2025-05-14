@@ -5,10 +5,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 
-import { UserRepository } from 'src/modules/users/repositories/user.repository';
+import { UserRepository } from 'src/modules/users/repositories/users.repository';
 
 import { Establishment } from '../entities/establishment.entity';
-import { EstablishmentRepository } from '../repositories/establishment.repository';
+import { EstablishmentsRepository } from '../repositories/establishments.repository';
 import { CreateEstablishmentDto } from '../dto/create-establishment.dto';
 
 import { v4 as uuidv4 } from 'uuid';
@@ -16,8 +16,8 @@ import { v4 as uuidv4 } from 'uuid';
 @Injectable()
 export class CreateEstablishmentUseCase {
   constructor(
-    @Inject('EstablishmentRepository')
-    private readonly repository: EstablishmentRepository,
+    @Inject('EstablishmentsRepository')
+    private readonly repository: EstablishmentsRepository,
 
     @Inject('UserRepository')
     private readonly userRepository: UserRepository,

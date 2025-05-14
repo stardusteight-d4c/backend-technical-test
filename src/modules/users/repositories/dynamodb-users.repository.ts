@@ -7,12 +7,12 @@ import {
   DeleteCommand,
   ScanCommand,
 } from '@aws-sdk/lib-dynamodb';
-import { UserRepository } from './user.repository';
+import { UsersRepository } from './users.repository';
 import { User } from '../entities/user.entity';
 import { DYNAMO_CLIENT } from '../../../common/dynamodb/dynamodb.provider';
 
 @Injectable()
-export class DynamoDbUserRepository implements UserRepository {
+export class DynamoDbUsersRepository implements UsersRepository {
   private readonly tableName = 'Users';
 
   constructor(
