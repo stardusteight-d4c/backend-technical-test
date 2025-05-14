@@ -24,5 +24,11 @@ import { UserController } from './controller/user.controller';
       useClass: DynamoDbUserRepository,
     },
   ],
+  exports: [
+    {
+      provide: 'UserRepository',
+      useClass: DynamoDbUserRepository,
+    },
+  ],
 })
 export class UserModule {}
