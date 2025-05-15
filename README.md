@@ -1,140 +1,24 @@
-# API de Gerenciamento de Estabelecimentos e Produtos
+# 🏪 API de Gerenciamento de Estabelecimentos e Produtos
 
-Esta é uma API RESTful construída com NestJS para gerenciar estabelecimentos, produtos e usuários.
+Uma API RESTful construída com NestJS para gerenciar estabelecimentos, produtos e usuários.
 
-## Tecnologias Utilizadas
+## 📚 Índice
 
-- NestJS
-- TypeScript
-- DynamoDB
-- Class Validator
+- [Tecnologias](#-tecnologias)
+- [Configuração](#-configuração)
+- [Endpoints](#-endpoints)
+- [Exemplos](#-exemplos)
+- [Validações](#-validações)
+- [Banco de Dados](#-banco-de-dados)
 
-## Endpoints
+## 🚀 Tecnologias
 
-### Usuários (`/users`)
+- [NestJS](https://nestjs.com/) - Framework Node.js
+- TypeScript - Linguagem de programação
+- DynamoDB - Banco de dados
+- Class Validator - Validação de dados
 
-#### GET `/users`
-Lista todos os usuários cadastrados.
-
-#### GET `/users/:id`
-Retorna os detalhes de um usuário específico.
-
-#### POST `/users`
-Cria um novo usuário.
-
-Corpo da requisição:
-```json
-{
-  "name": "string",
-  "email": "string",
-  "type": "owner | customer"
-}
-```
-
-#### PATCH `/users/:id`
-Atualiza os dados de um usuário.
-
-Corpo da requisição (todos os campos são opcionais):
-```json
-{
-  "name": "string",
-  "email": "string",
-  "type": "owner | customer"
-}
-```
-
-#### DELETE `/users/:id`
-Remove um usuário.
-
-### Estabelecimentos (`/establishments`)
-
-#### GET `/establishments`
-Lista todos os estabelecimentos.
-
-#### GET `/establishments?type=:type`
-Lista estabelecimentos filtrados por tipo.
-
-#### GET `/establishments/:id`
-Retorna os detalhes de um estabelecimento específico.
-
-#### POST `/establishments`
-Cria um novo estabelecimento.
-
-Corpo da requisição:
-```json
-{
-  "name": "string",
-  "ownerId": "UUID",
-  "type": "shopping | local"
-}
-```
-
-> Um User só pode criar um Establishment se o campo type for "owner".
-
-#### PATCH `/establishments/:id`
-Atualiza os dados de um estabelecimento.
-
-#### DELETE `/establishments/:id`
-Remove um estabelecimento.
-
-### Regras de Estabelecimentos (`/establishments-rules`)
-
-#### GET `/establishments-rules/:establishmentId`
-Retorna as regras de um estabelecimento específico.
-
-#### POST `/establishments-rules`
-Cria novas regras para um estabelecimento.
-
-Corpo da requisição:
-```json
-{
-  "establishmentId": "UUID",
-  "picturesLimit": 10,
-  "videoLimit": 5
-}
-```
-
-#### PATCH `/establishments-rules/:id`
-Atualiza as regras de um estabelecimento.
-
-#### DELETE `/establishments-rules/:id`
-Remove as regras de um estabelecimento.
-
-### Produtos (`/products`)
-
-#### GET `/products`
-Lista todos os produtos.
-
-#### GET `/products/:id`
-Retorna os detalhes de um produto específico.
-
-#### POST `/products`
-Cria um novo produto.
-
-Corpo da requisição:
-```json
-{
-  "name": "string",
-  "price": "number (em centavos)",
-  "establishmentId": "UUID"
-}
-```
-
-#### PATCH `/products/:id`
-Atualiza os dados de um produto.
-
-Corpo da requisição (todos os campos são opcionais):
-```json
-{
-  "name": "string",
-  "price": "number (em centavos)"
-}
-```
-
-#### DELETE `/products/:id`
-Remove um produto.
-
-## Configuração do Ambiente
+## ⚙️ Configuração
 
 1. Copie o arquivo `example-env.txt` para `.env`
 2. Configure as variáveis de ambiente necessárias
@@ -148,21 +32,134 @@ npm install
 npm run start:dev
 ```
 
-## Validações
+## 🛣️ Endpoints
 
-A API utiliza o Class Validator para validação de dados:
-- Emails devem ser válidos
-- Preços devem ser números inteiros positivos (em centavos)
-- IDs de estabelecimentos devem ser UUIDs válidos
-- Tipos de usuário devem ser 'owner' ou 'customer'
+### 👥 Usuários (`/users`)
 
-## Banco de Dados
+#### `GET /users`
+> Lista todos os usuários cadastrados.
 
-A API utiliza o DynamoDB como banco de dados. Certifique-se de ter as credenciais AWS configuradas corretamente no arquivo `.env`.
+#### `GET /users/:id`
+> Retorna os detalhes de um usuário específico.
 
-## Exemplos de Uso
+#### `POST /users`
+> Cria um novo usuário.
 
-### Criando um Usuário (Owner)
+Corpo da requisição:
+```json
+{
+  "name": "string",
+  "email": "string",
+  "type": "owner | customer"
+}
+```
+
+#### `PATCH /users/:id`
+> Atualiza os dados de um usuário.
+
+Corpo da requisição (todos os campos são opcionais):
+```json
+{
+  "name": "string",
+  "email": "string",
+  "type": "owner | customer"
+}
+```
+
+#### `DELETE /users/:id`
+> Remove um usuário.
+
+### 🏢 Estabelecimentos (`/establishments`)
+
+#### `GET /establishments`
+> Lista todos os estabelecimentos.
+
+#### `GET /establishments?type=:type`
+> Lista estabelecimentos filtrados por tipo.
+
+#### `GET /establishments/:id`
+> Retorna os detalhes de um estabelecimento específico.
+
+#### `POST /establishments`
+> Cria um novo estabelecimento.
+
+⚠️ **Importante**: Um User só pode criar um Establishment se o campo type for "owner".
+
+Corpo da requisição:
+```json
+{
+  "name": "string",
+  "ownerId": "UUID",
+  "type": "shopping | local"
+}
+```
+
+#### `PATCH /establishments/:id`
+> Atualiza os dados de um estabelecimento.
+
+#### `DELETE /establishments/:id`
+> Remove um estabelecimento.
+
+### 📋 Regras de Estabelecimentos (`/establishments-rules`)
+
+#### `GET /establishments-rules/:establishmentId`
+> Retorna as regras de um estabelecimento específico.
+
+#### `POST /establishments-rules`
+> Cria novas regras para um estabelecimento.
+
+Corpo da requisição:
+```json
+{
+  "establishmentId": "UUID",
+  "picturesLimit": 10,
+  "videoLimit": 5
+}
+```
+
+#### `PATCH /establishments-rules/:id`
+> Atualiza as regras de um estabelecimento.
+
+#### `DELETE /establishments-rules/:id`
+> Remove as regras de um estabelecimento.
+
+### 🛍️ Produtos (`/products`)
+
+#### `GET /products`
+> Lista todos os produtos.
+
+#### `GET /products/:id`
+> Retorna os detalhes de um produto específico.
+
+#### `POST /products`
+> Cria um novo produto.
+
+Corpo da requisição:
+```json
+{
+  "name": "string",
+  "price": "number (em centavos)",
+  "establishmentId": "UUID"
+}
+```
+
+#### `PATCH /products/:id`
+> Atualiza os dados de um produto.
+
+Corpo da requisição (todos os campos são opcionais):
+```json
+{
+  "name": "string",
+  "price": "number (em centavos)"
+}
+```
+
+#### `DELETE /products/:id`
+> Remove um produto.
+
+## 💡 Exemplos
+
+### 👤 Criando um Usuário (Owner)
 ```json
 {
   "name": "João Silva",
@@ -171,7 +168,7 @@ A API utiliza o DynamoDB como banco de dados. Certifique-se de ter as credenciai
 }
 ```
 
-### Criando um Estabelecimento
+### 🏬 Criando um Estabelecimento
 ```json
 {
   "name": "Shopping Center XYZ",
@@ -180,7 +177,7 @@ A API utiliza o DynamoDB como banco de dados. Certifique-se de ter as credenciai
 }
 ```
 
-### Criando Regras para um Estabelecimento
+### ⚖️ Criando Regras para um Estabelecimento
 ```json
 {
   "establishmentId": "550e8400-e29b-41d4-a716-446655440000",
@@ -189,7 +186,7 @@ A API utiliza o DynamoDB como banco de dados. Certifique-se de ter as credenciai
 }
 ```
 
-### Criando um Produto
+### 📦 Criando um Produto
 ```json
 {
   "name": "Produto XYZ",
@@ -197,3 +194,17 @@ A API utiliza o DynamoDB como banco de dados. Certifique-se de ter as credenciai
   "establishmentId": "550e8400-e29b-41d4-a716-446655440000"
 }
 ```
+
+## ✅ Validações
+
+A API utiliza o Class Validator para validação de dados:
+
+- 📧 Emails devem ser válidos
+- 💰 Preços devem ser números inteiros positivos (em centavos)
+- 🔑 IDs de estabelecimentos devem ser UUIDs válidos
+- 👥 Tipos de usuário devem ser 'owner' ou 'customer'
+- 🏢 Tipos de estabelecimento devem ser 'shopping' ou 'local'
+
+## 💾 Banco de Dados
+
+A API utiliza o DynamoDB como banco de dados. Certifique-se de ter as credenciais AWS configuradas corretamente no arquivo `.env`.
