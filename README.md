@@ -54,6 +54,8 @@ Corpo da requisição:
 }
 ```
 
+> Não permite um email já cadastrado
+
 #### `PATCH /users/:id`
 > Atualiza os dados de um usuário.
 

@@ -5,7 +5,7 @@ export class CreateUserDto {
   @IsString()
   name: string;
 
-  @IsEmail()
+  @IsEmail({}, { message: 'Invalid email format' })
   email: string;
 
   @IsEnum(UserType, { message: 'type must be either owner or customer' })
