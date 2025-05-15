@@ -14,8 +14,6 @@ export class CreateUserUseCase {
   async execute(dto: CreateUserDto): Promise<User> {
     const existingByEmail = await this.userRepository.findByEmail(dto.email);
 
-    console.log(existingByEmail);
-    
     if (existingByEmail) {
       throw new ConflictException('Email already in use');
     }
