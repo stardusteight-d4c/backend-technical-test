@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { EstablishmentsRulesRepository } from '../repositories/establishments-rules.repository';
 import { UpdateEstablishmentRulesDto } from '../dto/update-establishment-rules.dto';
 import { EstablishmentRules } from '../entities/establishment-rule.entity';
-import { sanitizeObject } from 'src/shared/utils/sanitize-object';
+import { sanitizeObject } from '../../../shared/utils/sanitize-object';
 
 @Injectable()
 export class UpdateEstablishmentRulesUseCase {

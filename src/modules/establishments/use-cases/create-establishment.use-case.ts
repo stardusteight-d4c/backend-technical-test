@@ -5,7 +5,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 
-import { UsersRepository } from 'src/modules/users/repositories/users.repository';
+import { UsersRepository } from '../../users/repositories/users.repository';
 
 import { Establishment } from '../entities/establishment.entity';
 import { EstablishmentsRepository } from '../repositories/establishments.repository';

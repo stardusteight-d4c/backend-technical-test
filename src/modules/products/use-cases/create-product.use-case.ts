@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { Product } from '../entities/product.entity';
 import { CreateProductDto } from '../dto/create-product.dto';
-import { EstablishmentsRepository } from 'src/modules/establishments/repositories/establishments.repository';
+import { EstablishmentsRepository } from '../../establishments/repositories/establishments.repository';
 import { ProductsRepository } from '../repositories/products.repository';
 
 @Injectable()

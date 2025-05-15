@@ -2,7 +2,7 @@ import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 
 import { EstablishmentsRulesRepository } from '../repositories/establishments-rules.repository';
 import { EstablishmentRules } from '../entities/establishment-rule.entity';
-import { EstablishmentsRepository } from 'src/modules/establishments/repositories/establishments.repository';
+import { EstablishmentsRepository } from '../../establishments/repositories/establishments.repository';
 
 @Injectable()
 export class GetEstablishmentRulesByEstablishmentIdUseCase {

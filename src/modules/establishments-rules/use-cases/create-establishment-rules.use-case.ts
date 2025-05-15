@@ -1,7 +1,7 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 
-import { EstablishmentsRepository } from 'src/modules/establishments/repositories/establishments.repository';
+import { EstablishmentsRepository } from '../../establishments/repositories/establishments.repository';
 
 import { EstablishmentsRulesRepository } from '../repositories/establishments-rules.repository';
 import { CreateEstablishmentRulesDto } from '../dto/create-establishment-rules.dto';

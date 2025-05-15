@@ -2,7 +2,7 @@ import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { EstablishmentsRepository } from '../repositories/establishments.repository';
 import { UpdateEstablishmentDto } from '../dto/update-establishment.dto';
 import { Establishment } from '../entities/establishment.entity';
-import { sanitizeObject } from 'src/shared/utils/sanitize-object';
+import { sanitizeObject } from '../../../shared/utils/sanitize-object';
 
 @Injectable()
 export class UpdateEstablishmentUseCase {

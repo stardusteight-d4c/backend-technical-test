@@ -207,6 +207,105 @@ A API utiliza o Class Validator para validação de dados:
 - 👥 Tipos de usuário devem ser 'owner' ou 'customer'
 - 🏢 Tipos de estabelecimento devem ser 'shopping' ou 'local'
 
+## 🧪 Testes
+
+O projeto inclui testes automatizados para todos os controllers, garantindo o funcionamento correto das funcionalidades.
+
+### Executando os Testes
+
+Para executar os testes dos controllers:
+```bash
+npm run test:controllers
+```
+
+Para executar os testes em modo watch:
+```bash
+npm run test:controllers:watch
+```
+
+### Cobertura de Testes
+
+#### UsersController
+- Criação de usuários
+  - ✓ Cria um novo usuário
+  - ✓ Impede a criação de usuário com email duplicado
+- Busca de usuários
+  - ✓ Retorna um usuário por ID
+  - ✓ Lança NotFoundException quando usuário não existe
+- Atualização de usuários
+  - ✓ Atualiza dados do usuário
+  - ✓ Lança NotFoundException ao atualizar usuário inexistente
+- Remoção de usuários
+  - ✓ Remove um usuário
+  - ✓ Lança NotFoundException ao remover usuário inexistente
+- Listagem de usuários
+  - ✓ Retorna todos os usuários
+  - ✓ Retorna array vazio quando não há usuários
+
+#### EstablishmentsController
+- Criação de estabelecimentos
+  - ✓ Cria um novo estabelecimento
+  - ✓ Impede criação com owner inexistente
+  - ✓ Impede criação por usuário não-owner
+- Busca de estabelecimentos
+  - ✓ Retorna um estabelecimento por ID
+  - ✓ Lança NotFoundException quando estabelecimento não existe
+- Atualização de estabelecimentos
+  - ✓ Atualiza dados do estabelecimento
+  - ✓ Lança NotFoundException ao atualizar estabelecimento inexistente
+- Remoção de estabelecimentos
+  - ✓ Remove um estabelecimento
+  - ✓ Lança NotFoundException ao remover estabelecimento inexistente
+- Listagem de estabelecimentos
+  - ✓ Retorna todos os estabelecimentos
+  - ✓ Filtra estabelecimentos por tipo
+  - ✓ Retorna array vazio quando não há estabelecimentos
+
+#### EstablishmentsRulesController
+- Criação de regras
+  - ✓ Cria regras para um estabelecimento
+  - ✓ Impede criação para estabelecimento inexistente
+- Busca de regras
+  - ✓ Retorna regras por ID do estabelecimento
+  - ✓ Lança NotFoundException quando estabelecimento não existe
+- Atualização de regras
+  - ✓ Atualiza regras do estabelecimento
+  - ✓ Lança erro ao atualizar regras inexistentes
+- Remoção de regras
+  - ✓ Remove regras de um estabelecimento
+
+#### ProductsController
+- Criação de produtos
+  - ✓ Cria um novo produto
+  - ✓ Impede criação para estabelecimento inexistente
+- Busca de produtos
+  - ✓ Retorna um produto por ID
+  - ✓ Lança NotFoundException quando produto não existe
+- Atualização de produtos
+  - ✓ Atualiza dados do produto
+  - ✓ Lança NotFoundException ao atualizar produto inexistente
+- Remoção de produtos
+  - ✓ Remove um produto
+  - ✓ Lança NotFoundException ao remover produto inexistente
+- Listagem de produtos
+  - ✓ Retorna todos os produtos
+  - ✓ Retorna array vazio quando não há produtos
+
+### Estrutura dos Testes
+
+Os testes utilizam repositórios em memória (`InMemoryRepository`) para simular o banco de dados, permitindo testes rápidos e isolados. Cada controller tem seu próprio arquivo de teste que verifica:
+
+1. Funcionalidades básicas (CRUD)
+2. Casos de erro
+3. Validações de negócio
+4. Relacionamentos entre entidades
+
+Os testes são escritos usando Jest e seguem as melhores práticas de testes unitários, incluindo:
+- Isolamento de testes
+- Limpeza do estado entre testes
+- Verificação de casos de sucesso e erro
+- Asserções claras e específicas
+
 ## 💾 Banco de Dados
 
 A API utiliza o DynamoDB como banco de dados. Certifique-se de ter as credenciais AWS configuradas corretamente no arquivo `.env`.
