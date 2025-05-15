@@ -20,7 +20,7 @@ import { CreateProductDto } from '../dto/create-product.dto';
 import { UpdateProductDto } from '../dto/update-product.dto';
 
 @Controller('products')
-export class ProductController {
+export class ProductsController {
   constructor(
     private readonly createProduct: CreateProductUseCase,
     private readonly getProduct: GetProductUseCase,

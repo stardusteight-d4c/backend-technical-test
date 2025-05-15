@@ -8,11 +8,13 @@ import {
   ListProductsUseCase,
 } from './use-cases';
 
-import { ProductController } from './controller/product.controller';
+import { ProductsController } from './controller/products.controller';
 import { DynamoDbProductsRepository } from './repositories/dynamodb-products.repository';
+import { EstablishmentsModule } from '../establishments/establishments.module';
 
 @Module({
-  controllers: [ProductController],
+  imports: [EstablishmentsModule],
+  controllers: [ProductsController],
   providers: [
     CreateProductUseCase,
     GetProductUseCase,
@@ -20,7 +22,7 @@ import { DynamoDbProductsRepository } from './repositories/dynamodb-products.rep
     DeleteProductUseCase,
     ListProductsUseCase,
     {
-      provide: 'ProductRepository',
+      provide: 'ProductsRepository',
       useClass: DynamoDbProductsRepository,
     },
   ],

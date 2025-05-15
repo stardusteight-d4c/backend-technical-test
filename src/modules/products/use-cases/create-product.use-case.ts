@@ -9,10 +9,10 @@ import { ProductsRepository } from '../repositories/products.repository';
 @Injectable()
 export class CreateProductUseCase {
   constructor(
-    @Inject('ProductRepository')
+    @Inject('ProductsRepository')
     private readonly repository: ProductsRepository,
 
-    @Inject('EstablishmentRepository')
+    @Inject('EstablishmentsRepository')
     private readonly establishmentsRepository: EstablishmentsRepository,
   ) {}
 

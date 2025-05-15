@@ -10,7 +10,7 @@ export class GetEstablishmentRulesByEstablishmentIdUseCase {
     @Inject('EstablishmentsRulesRepository')
     private readonly rulesRepository: EstablishmentsRulesRepository,
 
-    @Inject('EstablishmentRepository')
+    @Inject('EstablishmentsRepository')
     private readonly establishmentsRepository: EstablishmentsRepository,
   ) {}
 

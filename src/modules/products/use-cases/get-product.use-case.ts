@@ -5,7 +5,7 @@ import { ProductsRepository } from '../repositories/products.repository';
 @Injectable()
 export class GetProductUseCase {
   constructor(
-    @Inject('ProductRepository')
+    @Inject('ProductsRepository')
     private readonly repository: ProductsRepository,
   ) {}
 

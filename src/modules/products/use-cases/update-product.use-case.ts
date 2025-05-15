@@ -7,7 +7,7 @@ import { sanitizeObject } from 'src/shared/utils/sanitize-object';
 @Injectable()
 export class UpdateProductUseCase {
   constructor(
-    @Inject('ProductRepository')
+    @Inject('ProductsRepository')
     private readonly repository: ProductsRepository,
   ) {}
 
