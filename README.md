@@ -1,98 +1,199 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# API de Gerenciamento de Estabelecimentos e Produtos
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Esta é uma API RESTful construída com NestJS para gerenciar estabelecimentos, produtos e usuários.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Tecnologias Utilizadas
 
-## Description
+- NestJS
+- TypeScript
+- DynamoDB
+- Class Validator
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Endpoints
 
-## Project setup
+### Usuários (`/users`)
 
-```bash
-$ npm install
+#### GET `/users`
+Lista todos os usuários cadastrados.
+
+#### GET `/users/:id`
+Retorna os detalhes de um usuário específico.
+
+#### POST `/users`
+Cria um novo usuário.
+
+Corpo da requisição:
+```json
+{
+  "name": "string",
+  "email": "string",
+  "type": "owner | customer"
+}
 ```
 
-## Compile and run the project
+#### PATCH `/users/:id`
+Atualiza os dados de um usuário.
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+Corpo da requisição (todos os campos são opcionais):
+```json
+{
+  "name": "string",
+  "email": "string",
+  "type": "owner | customer"
+}
 ```
 
-## Run tests
+#### DELETE `/users/:id`
+Remove um usuário.
 
-```bash
-# unit tests
-$ npm run test
+### Estabelecimentos (`/establishments`)
 
-# e2e tests
-$ npm run test:e2e
+#### GET `/establishments`
+Lista todos os estabelecimentos.
 
-# test coverage
-$ npm run test:cov
+#### GET `/establishments?type=:type`
+Lista estabelecimentos filtrados por tipo.
+
+#### GET `/establishments/:id`
+Retorna os detalhes de um estabelecimento específico.
+
+#### POST `/establishments`
+Cria um novo estabelecimento.
+
+Corpo da requisição:
+```json
+{
+  "name": "string",
+  "ownerId": "UUID",
+  "type": "shopping | local"
+}
 ```
 
-## Deployment
+> Um User só pode criar um Establishment se o campo type for "owner".
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+#### PATCH `/establishments/:id`
+Atualiza os dados de um estabelecimento.
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+#### DELETE `/establishments/:id`
+Remove um estabelecimento.
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+### Regras de Estabelecimentos (`/establishments-rules`)
+
+#### GET `/establishments-rules/:establishmentId`
+Retorna as regras de um estabelecimento específico.
+
+#### POST `/establishments-rules`
+Cria novas regras para um estabelecimento.
+
+Corpo da requisição:
+```json
+{
+  "establishmentId": "UUID",
+  "picturesLimit": 10,
+  "videoLimit": 5
+}
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+#### PATCH `/establishments-rules/:id`
+Atualiza as regras de um estabelecimento.
 
-## Resources
+#### DELETE `/establishments-rules/:id`
+Remove as regras de um estabelecimento.
 
-Check out a few resources that may come in handy when working with NestJS:
+### Produtos (`/products`)
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+#### GET `/products`
+Lista todos os produtos.
 
-## Support
+#### GET `/products/:id`
+Retorna os detalhes de um produto específico.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+#### POST `/products`
+Cria um novo produto.
 
-## Stay in touch
+Corpo da requisição:
+```json
+{
+  "name": "string",
+  "price": "number (em centavos)",
+  "establishmentId": "UUID"
+}
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+#### PATCH `/products/:id`
+Atualiza os dados de um produto.
 
-## License
+Corpo da requisição (todos os campos são opcionais):
+```json
+{
+  "name": "string",
+  "price": "number (em centavos)"
+}
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+#### DELETE `/products/:id`
+Remove um produto.
+
+## Configuração do Ambiente
+
+1. Copie o arquivo `example-env.txt` para `.env`
+2. Configure as variáveis de ambiente necessárias
+3. Instale as dependências:
+```bash
+npm install
+```
+
+4. Execute o projeto:
+```bash
+npm run start:dev
+```
+
+## Validações
+
+A API utiliza o Class Validator para validação de dados:
+- Emails devem ser válidos
+- Preços devem ser números inteiros positivos (em centavos)
+- IDs de estabelecimentos devem ser UUIDs válidos
+- Tipos de usuário devem ser 'owner' ou 'customer'
+
+## Banco de Dados
+
+A API utiliza o DynamoDB como banco de dados. Certifique-se de ter as credenciais AWS configuradas corretamente no arquivo `.env`.
+
+## Exemplos de Uso
+
+### Criando um Usuário (Owner)
+```json
+{
+  "name": "João Silva",
+  "email": "joao@example.com",
+  "type": "owner"
+}
+```
+
+### Criando um Estabelecimento
+```json
+{
+  "name": "Shopping Center XYZ",
+  "ownerId": "550e8400-e29b-41d4-a716-446655440000",
+  "type": "shopping"
+}
+```
+
+### Criando Regras para um Estabelecimento
+```json
+{
+  "establishmentId": "550e8400-e29b-41d4-a716-446655440000",
+  "picturesLimit": 5,
+  "videoLimit": 2
+}
+```
+
+### Criando um Produto
+```json
+{
+  "name": "Produto XYZ",
+  "price": 1990,
+  "establishmentId": "550e8400-e29b-41d4-a716-446655440000"
+}
+```
